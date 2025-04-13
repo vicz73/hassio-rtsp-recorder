@@ -1,14 +1,20 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 
-RTSP_URL="${RTSP_URL:-rtsp://}"
-TARGET_DIR="${TARGET_DIR:-/media/Videosorveglianza_Cam06}"
+RTSP_URL=$(jq -r '.rtsp_url' /data/options.json)
+OUTPUT_PATH=$(jq -r '.output_path' /data/options.json)
+CLIP_DURATION=$(jq -r '.clip_duration' /data/options.json)
+RETENTION_DAYS=$(jq -r '.retention_days' /data/options.json)
 
-mkdir -p "$TARGET_DIR"
-
-echo "Starting recording from $RTSP_URL to $TARGET_DIR..."
+mkdir -p "$OUTPUT_PATH"
 
 while true; do
-  TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
-  ffmpeg -rtsp_transport tcp -i "$RTSP_URL" -vcodec copy -acodec copy     -t "$CLIP_DURATION" "$TARGET_DIR/rec_$TIMESTAMP.mp4"
-  find "$TARGET_DIR" -name "*.mp4" -mtime +$RETENTION_DAYS -delete
+  TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+
+  ffmpeg -rtsp_transport tcp -i "$RTSP_URL" \
+    -t "$CLIP_DURATION" \
+    -vcodec copy -acodec copy \
+    "$OUTPUT_PATH/$TIMESTAMP.mp4"
+
+  # Rimuove file più vecchi di X giorni
+  find "$OUTPUT_PATH" -type f -mtime +"$RETENTION_DAYS" -delete
 done
