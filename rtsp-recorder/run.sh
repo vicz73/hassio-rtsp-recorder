@@ -9,6 +9,6 @@ echo "Starting recording from $RTSP_URL to $TARGET_DIR..."
 
 while true; do
   TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
-  ffmpeg -rtsp_transport tcp -i "$RTSP_URL" -vcodec copy -acodec copy     -t 1800 "$TARGET_DIR/rec_$TIMESTAMP.mp4"
-  find "$TARGET_DIR" -name "*.mp4" -mtime +30 -delete
+  ffmpeg -rtsp_transport tcp -i "$RTSP_URL" -vcodec copy -acodec copy     -t "$CLIP_DURATION" "$TARGET_DIR/rec_$TIMESTAMP.mp4"
+  find "$TARGET_DIR" -name "*.mp4" -mtime +$RETENTION_DAYS -delete
 done

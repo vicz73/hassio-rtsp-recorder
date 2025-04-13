@@ -18,6 +18,10 @@ map:
 options:
   rtsp_url: "rtsp://user:pass@camera/stream"
   output_path: "/share/cam_output"
+  clip_duration: 60
+  retention_days: 7
 schema:
   rtsp_url: str
   output_path: str
+  clip_duration: int
+  retention_days: int
