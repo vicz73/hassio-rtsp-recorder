@@ -1,15 +1,27 @@
 name: RTSP Recorder
 version: "1.0"
 slug: rtsp-recorder
-description: Simple RTSP to File recorder with ffmpeg
-startup: services
+description: Simple RTSP to file recorder using FFmpeg
+startup: application
 boot: auto
+arch:
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+  - armhf
+options:
+  rtsp_url: "rtsp://user:pass@camera/stream"
+  output_path: "/share/cam_output"
+schema:
+  rtsp_url: str
+  output_path: str
+init: false
 host_network: true
 privileged:
-  - SYS_ADMIN
-schema:
-  RTSP_URL: str
-  OUTPUT_DIR: str
-options:
-  RTSP_URL: "rtsp://user:pass@camera-ip/stream"
-  OUTPUT_DIR: "/media"
+  - sys_admin
+  - dac_read_search
+  - dac_override
+map:
+  - share:rw
+  - config:rw
