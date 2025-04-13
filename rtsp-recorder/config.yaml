@@ -11,5 +11,5 @@ schema:
   RTSP_URL: str
   OUTPUT_DIR: str
 options:
-  RTSP_URL: "rtsp://tapo-cam-06:6Pb05RFaqAG@192.168.178.163:554/stream2"
-  OUTPUT_DIR: "/media/Videosorveglianza_Cam06"
+  RTSP_URL: "rtsp://user:pass@camera-ip/stream"
+  OUTPUT_DIR: "/media"
