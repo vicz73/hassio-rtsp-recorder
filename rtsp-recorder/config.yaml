@@ -18,10 +18,6 @@ schema:
   output_path: str
 init: false
 host_network: true
-privileged:
-  - sys_admin
-  - dac_read_search
-  - dac_override
 map:
   - share:rw
   - config:rw
