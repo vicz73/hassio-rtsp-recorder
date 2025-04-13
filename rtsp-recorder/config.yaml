@@ -10,14 +10,14 @@ arch:
   - amd64
   - i386
   - armhf
+init: false
+host_network: true
+map:
+  - share:rw
+  - config:rw
 options:
   rtsp_url: "rtsp://user:pass@camera/stream"
   output_path: "/share/cam_output"
 schema:
   rtsp_url: str
   output_path: str
-init: false
-host_network: true
-map:
-  - share:rw
-  - config:rw
