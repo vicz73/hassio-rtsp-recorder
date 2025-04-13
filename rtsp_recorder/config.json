@@ -1,0 +1,19 @@
+{
+  "name": "RTSP Recorder",
+  "version": "1.0",
+  "slug": "rtsp_recorder",
+  "description": "Records RTSP streams with ffmpeg and saves to /media.",
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "rtsp_url": "rtsp://tapo-cam-06:6Pb05RFaqAG@192.168.178.163:554/stream2",
+    "target_dir": "/media/Videosorveglianza_Cam06"
+  },
+  "schema": {
+    "rtsp_url": "str",
+    "target_dir": "str"
+  },
+  "host_network": true,
+  "map": ["media:rw"],
+  "privileged": ["SYS_ADMIN"]
+}
