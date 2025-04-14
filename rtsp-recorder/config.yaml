@@ -3,7 +3,7 @@ version: "1.0"
 slug: rtsp-recorder
 description: Simple RTSP to file recorder using FFmpeg
 startup: application
-boot: auto
+boot: manual
 arch:
   - armv7
   - aarch64
